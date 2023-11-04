@@ -1,4 +1,5 @@
 export interface Standings {
+    rank:number;
     name: string; 
     logo: string; 
     teamId: number;

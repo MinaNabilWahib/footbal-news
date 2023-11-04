@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { FootballApiService } from '../core/football-api.service';
 import { TopLeaguesIDs } from '../core/enums/leagues.enum';
+import { Standings } from '../core/models/standings.model';
+import { GeneralMapper } from '../core/general-mapper';
 
 @Component({
   selector: 'app-home',
@@ -10,23 +12,33 @@ import { TopLeaguesIDs } from '../core/enums/leagues.enum';
 })
 export class HomeComponent implements OnInit{
 
-  constructor(private footballApiService: FootballApiService){}
+
+  constructor(private footballApiService: FootballApiService, private generalMapper: GeneralMapper){}
 
   items: MenuItem[] | undefined;
+  activeItem: MenuItem | undefined;
+  topLeagueId: number | undefined;
+
+  standings! : Standings[]; 
 
     ngOnInit() {
         this.items = [
-            { label: 'England', icon: 'pi pi-fw pi-flag-fill' , id:'englandSelect', command:() => this.getStandings(TopLeaguesIDs.PremierLeague)},
-            { label: 'Spain', icon: 'pi pi-fw pi-flag-fill' , id:'spainSelect'},
-            { label: 'Germany', icon: 'pi pi-fw pi-flag-fill' , id:'germanySelect'},
-            { label: 'France', icon: 'pi pi-fw pi-flag-fill' , id:'franceSelect'},
-            { label: 'Italy', icon: 'pi pi-fw pi-flag-fill' , id:'italySelect'}
+            { label: 'England', icon: 'pi pi-fw pi-flag-fill' , id:'englandSelect', command:(e) => this.getStandings(TopLeaguesIDs.PremierLeague,e)},
+            { label: 'Spain', icon: 'pi pi-fw pi-flag-fill' , id:'spainSelect', command:(e) => this.getStandings(TopLeaguesIDs.LaLiga,e)},
+            { label: 'Germany', icon: 'pi pi-fw pi-flag-fill' , id:'germanySelect', command:(e) => this.getStandings(TopLeaguesIDs.Bundesliga,e)},
+            { label: 'France', icon: 'pi pi-fw pi-flag-fill' , id:'franceSelect', command:(e) => this.getStandings(TopLeaguesIDs.Ligue1,e)},
+            { label: 'Italy', icon: 'pi pi-fw pi-flag-fill' , id:'italySelect', command:(e) => this.getStandings(TopLeaguesIDs.SerieA,e)}
         ];
+        this.activeItem =  this.footballApiService.activeItem ?? this.items[0];
+        this.topLeagueId = this.footballApiService.topLeagueId ?? TopLeaguesIDs.PremierLeague;
+        this.getStandings(this.topLeagueId,{item:this.activeItem});
     }
 
-    getStandings(leagueId:number){
+    getStandings(leagueId:number,e:MenuItemCommandEvent){
+      this.footballApiService.activeItem = e.item;
+      this.footballApiService.topLeagueId = leagueId;
       this.footballApiService.getStandings(leagueId).subscribe((res)=>{
-        console.log(res);
+        this.standings = res;
       })
     }
     

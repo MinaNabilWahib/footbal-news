@@ -6,6 +6,7 @@ import { GeneralMapper } from './general-mapper';
 import { environment } from 'src/environments/environment';
 import { Fixtures } from './models/fixtures.model';
 import { ApiUrls } from './enums/api-urls.enum';
+import { MenuItem } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,12 @@ import { ApiUrls } from './enums/api-urls.enum';
 export class FootballApiService {
   standingsInfo$: BehaviorSubject<any> = new BehaviorSubject(null);
   fixturesInfo$: BehaviorSubject<any> = new BehaviorSubject(null);
+  private _activeItem: MenuItem | undefined;
+  
+  private _topLeagueId!: number; 
+  
   httpOptions = {
     headers: new HttpHeaders({ 
-      'Content-Type': 'application/json',
-      'x-rapidapi-host': 'v3.football.api-sports.io',
-		  'x-rapidapi-key': environment.apiKey 
     })
   };
 
@@ -51,6 +53,21 @@ export class FootballApiService {
       this.fixturesInfo$.next(formatedFixtures);
       return formatedFixtures;
     }))
+  }
+
+
+  public get topLeagueId(): number {
+    return this._topLeagueId;
+  }
+  public set topLeagueId(value: number) {
+    this._topLeagueId = value;
+  }
+
+  public get activeItem(): MenuItem | undefined {
+    return this._activeItem;
+  }
+  public set activeItem(value: MenuItem | undefined) {
+    this._activeItem = value;
   }
 
 }

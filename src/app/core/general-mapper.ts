@@ -11,8 +11,9 @@ export class GeneralMapper {
 
     mapToStandings(sourceJson: any):Standings[]{
         let standings: Standings[] = [];
-        standings = sourceJson.response.league.standings.map((unformatedStandings:any)=>{
+        standings = sourceJson.response[0].league.standings[0].map((unformatedStandings:any)=>{
             const formatedstandings : Standings = {
+                rank: 0,
                 name: '',
                 logo: '',
                 gamesPlayed: 0,
@@ -21,8 +22,9 @@ export class GeneralMapper {
                 gamesDraw: 0,
                 goalDiff: 0,
                 points: 0,
-                teamId: 0
+                teamId: 0,   
             }
+            formatedstandings.rank = unformatedStandings.rank;
             formatedstandings.teamId = unformatedStandings.team.id;
             formatedstandings.name = unformatedStandings.team.name;
             formatedstandings.logo = unformatedStandings.team.logo;

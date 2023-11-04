@@ -3,8 +3,8 @@
     <p-table [value]="standings" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
-                <th></th>
-                <th></th>
+                <th>Rank</th>
+                <th>Logo</th>
                 <th>Name</th>
                 <th>Games</th>
                 <th>W</th>
@@ -15,10 +15,10 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-standing>
-            <tr>
+            <tr [pSelectableRow]="standing"  (click)="goToTeamStatistics(standing.teamId)">
+                <td>{{standing.rank}}</td>
+                <td><img src={{standing.logo}} alt="team logo" style="width: 50px;"></td>
                 <td>{{ standing.name }}</td>
-                <td>{{ standing.code }}</td>
-                <td>{{ standing.logo }}</td>
                 <td>{{ standing.gamesPlayed }}</td>
                 <td>{{ standing.gamesWin }}</td>
                 <td>{{ standing.gamesLose }}</td>
