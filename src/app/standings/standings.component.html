@@ -1,0 +1,31 @@
+
+<div class="card">
+    <p-table [value]="standings" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Name</th>
+                <th>Games</th>
+                <th>W</th>
+                <th>L</th>
+                <th>D</th>
+                <th>Goal Difference</th>
+                <th>Points</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-standing>
+            <tr>
+                <td>{{ standing.name }}</td>
+                <td>{{ standing.code }}</td>
+                <td>{{ standing.logo }}</td>
+                <td>{{ standing.gamesPlayed }}</td>
+                <td>{{ standing.gamesWin }}</td>
+                <td>{{ standing.gamesLose }}</td>
+                <td>{{ standing.gamesDraw }}</td>
+                <td>{{ standing.goalDiff }}</td>
+                <td>{{ standing.points }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
