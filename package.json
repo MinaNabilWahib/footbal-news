@@ -1,6 +1,8 @@
 {
   "name": "football-news",
   "version": "0.0.0",
+  "homepage": "https://minanabilwahib.github.io/football-news/",
+
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
