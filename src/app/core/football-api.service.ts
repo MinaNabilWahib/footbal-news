@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, take, tap } from 'rxjs';
 import { Standings } from './models/standings.model';
 import { GeneralMapper } from './general-mapper';
-import { environment } from 'src/environments/environment';
 import { Fixtures } from './models/fixtures.model';
 import { ApiUrls } from './enums/api-urls.enum';
 import { MenuItem } from 'primeng/api';
