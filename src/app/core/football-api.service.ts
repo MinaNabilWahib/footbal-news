@@ -12,11 +12,29 @@ import { MenuItem } from 'primeng/api';
   providedIn: 'root'
 })
 export class FootballApiService {
-  standingsInfo$: BehaviorSubject<any> = new BehaviorSubject(null);
-  fixturesInfo$: BehaviorSubject<any> = new BehaviorSubject(null);
-  private _activeItem: MenuItem | undefined;
+  standingsInfo$: BehaviorSubject<Standings[]> = new BehaviorSubject([{
+    rank: 0,
+    name: '',
+    logo: '',
+    gamesPlayed: 0,
+    gamesWin: 0,
+    gamesLose: 0,
+    gamesDraw: 0,
+    goalDiff: 0,
+    points: 0,
+    teamId: 0,   
+}]);
+  fixturesInfo$: BehaviorSubject<Fixtures[]> = new BehaviorSubject([{
+    firstTeamName: '',
+    secondTeamName: '',
+    firstTeamScore: 0,
+    secondTeamScore: 0,
+    firstTeamLogo: '',
+    secondTeamLogo: ''
+}]);
+  private _activeItem: MenuItem = {};
   
-  private _topLeagueId!: number; 
+  private _topLeagueId: number = 39; 
   
   httpOptions = {
     headers: new HttpHeaders({ 
@@ -63,10 +81,10 @@ export class FootballApiService {
     this._topLeagueId = value;
   }
 
-  public get activeItem(): MenuItem | undefined {
+  public get activeItem(): MenuItem {
     return this._activeItem;
   }
-  public set activeItem(value: MenuItem | undefined) {
+  public set activeItem(value: MenuItem) {
     this._activeItem = value;
   }
 

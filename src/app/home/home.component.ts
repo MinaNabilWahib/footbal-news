@@ -15,11 +15,11 @@ export class HomeComponent implements OnInit{
 
   constructor(private footballApiService: FootballApiService, private generalMapper: GeneralMapper){}
 
-  items: MenuItem[] | undefined;
-  activeItem: MenuItem | undefined;
-  topLeagueId: number | undefined;
+  items: MenuItem[] = [{}];
+  activeItem: MenuItem = {};
+  topLeagueId: number = 39;
 
-  standings! : Standings[]; 
+  standings : Standings[] = []; 
 
     ngOnInit() {
         this.items = [
@@ -35,7 +35,9 @@ export class HomeComponent implements OnInit{
     }
 
     getStandings(leagueId:number,e:MenuItemCommandEvent){
-      this.footballApiService.activeItem = e.item;
+      if(e.item){
+        this.footballApiService.activeItem = e.item;
+      }
       this.footballApiService.topLeagueId = leagueId;
       this.footballApiService.getStandings(leagueId).subscribe((res)=>{
         this.standings = res;
