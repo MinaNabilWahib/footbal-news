@@ -2,7 +2,6 @@
   "name": "football-news",
   "version": "0.0.0",
   "homepage": "https://minanabilwahib.github.io/football-news/",
-
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -30,6 +29,9 @@
     "@angular/cli": "^16.2.9",
     "@angular/compiler-cli": "^16.2.0",
     "@types/jasmine": "~4.3.0",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "eslint": "^8.53.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Standings } from './models/standings.model';
 import { Fixtures } from './models/fixtures.model';
+import { StandingsResponse } from './models/standings-response.model';
+import { FixtureResponse } from './models/fixtures-response.model';
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +11,7 @@ import { Fixtures } from './models/fixtures.model';
 export class GeneralMapper {
     constructor(){}
 
-    mapToStandings(sourceJson: any):Standings[]{
+    mapToStandings(sourceJson: StandingsResponse):Standings[]{
         let standings: Standings[] = [];
         standings = sourceJson.response[0].league.standings[0].map((unformatedStandings:any)=>{
             const formatedstandings : Standings = {
@@ -41,7 +43,7 @@ export class GeneralMapper {
 
     }
 
-    mapToFixture(sourceJson:any):Fixtures[]{
+    mapToFixture(sourceJson:FixtureResponse):Fixtures[]{
         let fixtures: Fixtures[] = [];
         fixtures = sourceJson.response.map((unformatedFixtures:any)=>{
             const formatedFixtures: Fixtures = {

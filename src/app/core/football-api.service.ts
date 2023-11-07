@@ -6,6 +6,8 @@ import { GeneralMapper } from './general-mapper';
 import { Fixtures } from './models/fixtures.model';
 import { ApiUrls } from './enums/api-urls.enum';
 import { MenuItem } from 'primeng/api';
+import { StandingsResponse } from './models/standings-response.model';
+import { FixtureResponse } from './models/fixtures-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +49,7 @@ export class FootballApiService {
     const date = new Date();
     const season = date.getFullYear();
     const params = new HttpParams().set('league',leagueId).set('season',season);
-    const standingsResponse = this.httpClient.get(ApiUrls.Standings,{...this.httpOptions,params})
+    const standingsResponse = this.httpClient.get<StandingsResponse>(ApiUrls.Standings,{...this.httpOptions,params})
     .pipe(take(1))
 
     return standingsResponse.pipe(map((res)=>{
@@ -62,7 +64,7 @@ export class FootballApiService {
     const date = new Date();
     const season = date.getFullYear();
     const params = new HttpParams().set('team',teamId).set('season',season).set('last',10)
-    const fixturesResponse = this.httpClient.get(ApiUrls.Fixtures,{...this.httpOptions,params})
+    const fixturesResponse = this.httpClient.get<FixtureResponse>(ApiUrls.Fixtures,{...this.httpOptions,params})
     .pipe(take(1))
 
     return fixturesResponse.pipe(map((res)=>{
