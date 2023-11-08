@@ -3,6 +3,8 @@ import { Standings } from './models/standings.model';
 import { Fixtures } from './models/fixtures.model';
 import { StandingsResponse } from './models/standings-response.model';
 import { FixtureResponse } from './models/fixtures-response.model';
+import { UnformattedStandings } from './models/unformatted-standings.model';
+import { UnformattedFixture } from './models/unformatted-fixtures.model';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +15,7 @@ export class GeneralMapper {
 
     mapToStandings(sourceJson: StandingsResponse):Standings[]{
         let standings: Standings[] = [];
-        standings = sourceJson.response[0].league.standings[0].map((unformatedStandings:any)=>{
+        standings = sourceJson.response[0].league.standings[0].map((unformatedStandings:UnformattedStandings)=>{
             const formatedstandings : Standings = {
                 rank: 0,
                 name: '',
@@ -45,7 +47,7 @@ export class GeneralMapper {
 
     mapToFixture(sourceJson:FixtureResponse):Fixtures[]{
         let fixtures: Fixtures[] = [];
-        fixtures = sourceJson.response.map((unformatedFixtures:any)=>{
+        fixtures = sourceJson.response.map((unformatedFixtures:UnformattedFixture)=>{
             const formatedFixtures: Fixtures = {
                 firstTeamName: '',
                 secondTeamName: '',
