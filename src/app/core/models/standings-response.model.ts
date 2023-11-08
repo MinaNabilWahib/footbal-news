@@ -1,9 +1,9 @@
-import { Standings } from "./standings.model"
+import { UnformattedStandings } from "./unformatted-standings.model"
 
 export interface StandingsResponse{
     response:[{
         league:{
-            standings:[Standings[]]
+            standings:[UnformattedStandings[]]
         }
     }]
 }
